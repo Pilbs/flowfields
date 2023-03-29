@@ -4,8 +4,13 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color: hsl(271, 100%, 6%);
+}
+
 canvas {
-    border: 10px solid black;
+    border: 20px solid hsl(0, 0%, 19%);
+    border-radius: 7px;
     position:absolute;
     top: 50%;
     left: 50%;
