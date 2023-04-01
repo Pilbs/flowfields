@@ -64,7 +64,7 @@ class Planet {
         this.canvas = canvas2;
         this.x = this.canvas.width / 2;
         this.y = this.canvas.height / 2;
-        this.r = 200;
+        this.r = 150;
     }
     draw(context, h) {
         context.beginPath();
