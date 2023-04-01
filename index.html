@@ -4,20 +4,36 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Flow Fields</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <canvas id="canvas-bg-static"></canvas>
-        <canvas id="canvas-bg-animate"></canvas>
-        <canvas id="canvas-fg-static"></canvas>
-        <canvas id="canvas-fg-animate"></canvas>
-        
-        <script src="script.js" async defer></script>
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Flow Fields</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="canvas-bg-static"></canvas>
+    <canvas id="canvas-bg-animate"></canvas>
+    <canvas id="canvas-fg-static"></canvas>
+    <canvas id="canvas-fg-animate"></canvas>
+    <div id="controls">
+        <div id="container">
+            <label for="size" id="lblsize">Size</label>
+            <input type="range" name="size" id="sldSize">
+            <label for="colour" id="lblcolour">Colour</label>
+            <input type="range" name="colour" id="sldColour">
+            <label for="pattern" id="lblpattern">Pattern</label>
+            <input type="range" name="pattern" id="sldPattern">
+            <label for="clouds" id="lblclouds">Clouds</label>
+            <input type="range" name="clouds" id="sldClouds">
+        </div>
+    </div>
+
+    <script src="script.js" async defer></script>
+    <script src="controls.js" async defer></script>
+</body>
+
 </html>

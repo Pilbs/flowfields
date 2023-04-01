@@ -7,8 +7,8 @@ const ctx0 = canvas0.getContext('2d');
 const ctx1 = canvas1.getContext('2d');
 const ctx2 = canvas2.getContext('2d');
 const ctx3 = canvas3.getContext('2d');
-const width = 700;
-const height = 500;
+const width = window.innerWidth *0.8;
+const height = window.innerHeight * 0.8;
 // Set canvas size
 canvas0.width = width;
 canvas1.width = width;
@@ -127,13 +127,13 @@ const planet = new Planet(canvas2);
 let hue = Math.floor(Math.random() * 360);
 planet.draw(ctx2, hue);
 
-function randomTimer() {
-    const shootingStar = new ShootingStar(canvas1, 0, 0, 2, 3, 2);
-    shootingStar.animate()
-    setTimeout(randomTimer, Math.random() * 30000)
-}
+// function randomTimer() {
+//     const shootingStar = new ShootingStar(canvas1, 0, 0, 2, 3, 2);
+//     shootingStar.animate()
+//     setTimeout(randomTimer, Math.random() * 30000)
+// }
 
-randomTimer()
+// randomTimer()
 
 
 
