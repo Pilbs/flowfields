@@ -7,8 +7,14 @@ const ctx0 = canvas0.getContext('2d');
 const ctx1 = canvas1.getContext('2d');
 const ctx2 = canvas2.getContext('2d');
 const ctx3 = canvas3.getContext('2d');
+let sizeValue = document.getElementById('sldSize').value;
 const width = window.innerWidth * 0.8;
 const height = window.innerHeight * 0.8;
+const cloudArr = [];
+const cloudGridSize = 4;
+
+
+
 
 
 // Set canvas size
@@ -20,7 +26,13 @@ canvas0.height = height;
 canvas1.height = height;
 canvas2.height = height;
 canvas3.height = height;
-// Set planet class size (s), main color lightness (l) for gradient and secondary lightness (l2) for gradient
+
+
+let cloudXOrig = canvas2.width / 2 - (sizeValue);
+let cloudYOrig = canvas2.height / 2 - (sizeValue);
+const cloudW = ((sizeValue*2)/cloudGridSize)*3;
+const cloudH = cloudW / 2;
+// Set planet class main color lightness (l) for gradient and secondary lightness (l2) for gradient
 let s = 100;
 let l = 25;
 let l2 = l + 40;
@@ -66,7 +78,7 @@ class Planet {
         this.canvas = canvas2;
         this.x = this.canvas.width / 2;
         this.y = this.canvas.height / 2;
-       
+
     }
     draw(context, s, h) {
         context.beginPath();
@@ -124,31 +136,94 @@ for (let i = 0; i < 600; i++) {
 }
 
 let PlanetValues = {
-    size: Math.floor(Math.random() * 200),
+    size: sizeValue, //Math.floor(Math.random() * 200),
     colour: Math.floor(Math.random() * 360)
 }
 
 
 function setValue() {
-    document.getElementById('sldSize').max = canvas2.width *0.45;
-    const sizeValue = document.getElementById('sldSize').value;
+    document.getElementById('sldSize').max = canvas2.width * 0.45;
     const colourValue = document.getElementById('sldColour').value;
+    sizeValue = document.getElementById('sldSize').value;
     PlanetValues = {
         size: sizeValue,
         colour: colourValue
     }
-    console.log(PlanetValues);
+    
+    cloudXOrig = (canvas2.width / 2) - sizeValue;
+    cloudYOrig = (canvas2.height / 2) + sizeValue;
+   
     drawPlanet()
 }
+console.log(canvas2.width/2,sizeValue,cloudXOrig);
 
-function drawPlanet(){
-ctx2.clearRect(0, 0, width, height)
-const planet = new Planet(canvas2);
-// let hue = Math.floor(Math.random() * 360);
-planet.draw(ctx2 , PlanetValues.size, PlanetValues.colour);
+
+
+
+
+
+
+
+function rnd() {
+    let val
+    if (Math.random() > 0.5) {
+        val = true;
+    } else {
+        val = false;
+    }
+    return val
+}
+
+function drawCloud(x, y, w, h) {
+    const img = new Image()
+    img.onload = function () {
+        ctx2.drawImage(img, x, y, w, h);
+    }
+    img.src = 'cloud.png';
+}
+
+for (let i = 0; i < cloudGridSize; i++) {
+    cloudArr[i] = [];
+}
+
+for (let i = 0; i < cloudGridSize; i++) {
+    for (let j = 0; j < cloudGridSize; j++) {
+        cloudArr[j].push({
+            x: cloudXOrig + (cloudW * i),
+            y: cloudYOrig + (cloudH * j),
+            cloud: rnd()
+        })
+    }
+
+}
+
+
+function drawPlanet() {
+    ctx2.globalCompositeOperation = "source-over"
+    ctx2.clearRect(0, 0, width, height)
+    const planet = new Planet(canvas2);
+    // let hue = Math.floor(Math.random() * 360);
+    planet.draw(ctx2, PlanetValues.size, PlanetValues.colour);
+    for (let i = 0; i < cloudArr.length; i++) {
+        for (let j = 0; j < cloudArr.length; j++) {
+            if (cloudArr[i][j].cloud == true) {
+                ctx2.globalCompositeOperation ='source-atop'
+                drawCloud(cloudArr[i][j].x, cloudArr[i][j].y, cloudW, cloudH);
+                
+            }
+        }
+    }
 }
 
 drawPlanet()
+
+
+
+
+console.log(cloudArr);
+
+
+
 
 // function randomTimer() {
 //     const shootingStar = new ShootingStar(canvas1, 0, 0, 2, 3, 2);

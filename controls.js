@@ -1,6 +1,4 @@
 const controls = document.getElementById("controls");
-// const planet  = document.getElementById("canvas3");
-
 canvas3.addEventListener("click", displayControls);
 
 function displayControls(){
