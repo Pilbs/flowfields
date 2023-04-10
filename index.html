@@ -22,9 +22,9 @@
     <div id="controls">
         <div id="container">
             <label for="size" id="lblsize">Size</label>
-            <input type="range" name="size" id="sldSize">
+            <input type="range" name="size" id="sldSize" min="10" max="250" onchange="setValue()">
             <label for="colour" id="lblcolour">Colour</label>
-            <input type="range" name="colour" id="sldColour">
+            <input type="range" name="colour" id="sldColour" min="0" max="360" onchange="setValue()">
             <label for="pattern" id="lblpattern">Pattern</label>
             <input type="range" name="pattern" id="sldPattern">
             <label for="clouds" id="lblclouds">Clouds</label>
